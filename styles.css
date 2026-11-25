@@ -359,6 +359,8 @@ figcaption {
   line-height: 1.3;
 }
 .split-head .fine { margin-top: 0.9rem; }
+.split-photo { margin-top: 2.25rem; max-width: 30rem; }
+.split-photo img { width: 100%; border-radius: 6px; }
 
 .fine {
   font-size: 0.95rem;
