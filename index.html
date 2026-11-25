@@ -19,6 +19,8 @@
   <meta name="theme-color" content="#1d43a6">
 
   <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <link rel="icon" href="favicon-32.png" type="image/png" sizes="32x32">
+  <link rel="apple-touch-icon" href="apple-touch-icon.png">
   <link rel="preload" href="fonts/besley-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="fonts/libre-franklin-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="stylesheet" href="styles.css">
@@ -49,9 +51,23 @@
 <body>
   <a class="skip-link" href="#main">Skip to content</a>
 
+  <!-- Logo: the Plume House (gambrel roof, lit windows) and the House of Prayer (tower and spire), our neighbors on Broad Street -->
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+    <symbol id="mark" viewBox="0 0 64 64">
+      <g fill="currentColor" fill-rule="evenodd">
+        <path d="M26.5 33v-6.5H30v8.3z"/>
+        <path d="M6 58V43.5l3.6-8.2L20.5 29.5l10.9 5.8 3.6 8.2V58z"/>
+        <path d="M40.5 58V27.5h11V58zM43 42.5h2v-7.2l-1-2.3-1 2.3zM47 42.5h2v-7.2l-1-2.3-1 2.3z"/>
+        <path d="M39 27.5l3-7 2.05-9.500h3.900l2.050 9.500 3 7zM44.300 9.800 46 2l1.700 7.800z"/>
+        <path d="M4 57.500h56v3H4z"/>
+      </g>
+      <path fill="var(--mark-light, #ffb52e)" d="M11 45h5v6.500h-5zM18 45h5v6.500h-5zM25 45h5v6.500h-5z"/>
+    </symbol>
+  </svg>
+
   <div class="top">
     <header class="masthead wrap">
-      <a class="wordmark" href="#top" aria-label="Newark Coworks, home">Newark Coworks</a>
+      <a class="wordmark" href="#top" aria-label="Newark Coworks, home"><svg class="mark" aria-hidden="true" focusable="false"><use href="#mark"/></svg><span class="wordmark-text">Newark Coworks</span></a>
       <nav class="mainnav" aria-label="Sections">
         <a href="#space">The space</a>
         <a href="#membership">Membership</a>
@@ -81,7 +97,7 @@
              fetchpriority="high">
 
         <aside class="pass" aria-label="Membership card">
-          <p class="pass-issuer">Newark Coworks</p>
+          <p class="pass-issuer"><svg class="mark" aria-hidden="true" focusable="false"><use href="#mark"/></svg>Newark Coworks</p>
           <div>
             <p class="pass-price"><span class="pass-amount">$150</span> <span class="pass-per">a month</span></p>
             <p class="pass-note">Membership opens January 1, 2027</p>
@@ -268,7 +284,7 @@
   <footer class="foot">
     <div class="wrap foot-grid">
       <div>
-        <p class="wordmark wordmark-foot">Newark Coworks</p>
+        <p class="wordmark wordmark-foot"><svg class="mark" aria-hidden="true" focusable="false"><use href="#mark"/></svg>Newark Coworks</p>
         <p>A Rock Properties space.</p>
       </div>
       <address>

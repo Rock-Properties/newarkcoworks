@@ -157,7 +157,13 @@ a { color: inherit; }
   text-decoration: none;
   white-space: nowrap;
   margin: 0 auto 0 0;
+  display: flex;
+  align-items: center;
+  gap: 0.45em;
 }
+
+/* The logo mark: the Plume House and the House of Prayer */
+.mark { width: 2em; height: 2em; flex: none; margin-top: -0.3em; }
 
 .mainnav { display: flex; gap: 2rem; }
 .mainnav a {
@@ -227,7 +233,8 @@ a { color: inherit; }
 
 .pass p { margin: 0; max-width: none; }
 
-.pass-issuer { font-weight: 800; font-size: 1.1rem; }
+.pass-issuer { display: flex; align-items: center; gap: 0.45em; font-weight: 800; font-size: 1.1rem; }
+.pass .mark { --mark-light: var(--amber); }
 
 .pass-price { line-height: 1; white-space: nowrap; }
 .pass-amount {
@@ -468,16 +475,22 @@ figcaption {
   .routes div { grid-template-columns: minmax(0, 1fr); gap: 0.25rem; }
 }
 
+@media (max-width: 480px) {
+  .masthead { gap: 0.75rem; }
+  .masthead .wordmark { font-size: 1.05rem; gap: 0.35em; }
+  .btn-small { font-size: 0.85rem; padding: 0.6em 0.8em; }
+}
+
 @media (max-width: 420px) {
   body { font-size: 1.0625rem; }
-  .wordmark { font-size: 1.2rem; }
   .pass { padding: 1.1rem 1.25rem 1.15rem; }
   .pass-issuer { font-size: 1rem; }
 }
 
 @media (max-width: 360px) {
-  .wordmark { font-size: 1.05rem; }
-  .btn-small { font-size: 0.85rem; padding: 0.6em 0.8em; }
+  /* the mark stands in for the name; the link keeps its label for screen readers */
+  .masthead .wordmark { font-size: 1.3rem; }
+  .masthead .wordmark-text { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); }
   .pass-amount { font-size: 2.9rem; }
   .pass-note { font-size: 0.82rem; }
 }
