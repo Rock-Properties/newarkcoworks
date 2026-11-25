@@ -204,59 +204,32 @@ a { color: inherit; }
   border-radius: 6px 0 0 6px;
 }
 
-/* The desk pass: the one loud thing on the page */
+/* The membership card: the one loud thing on the page */
 
 .pass {
   position: absolute;
   left: clamp(-2.75rem, -3vw, -1rem);
   bottom: clamp(-5.5rem, -6vw, -3.5rem);
-  display: grid;
-  grid-template-columns: 1fr auto;
-  width: min(27rem, 80%);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: min(21.5rem, 70%);
+  aspect-ratio: 1.586;            /* the proportions of a wallet card */
+  padding: 1.35rem 1.6rem 1.4rem;
+  border-radius: 14px;
+  background: var(--amber);
   color: var(--night);
   font-family: var(--display);
   transform: rotate(-4deg);
-  filter: drop-shadow(8px 10px 0 rgba(13, 27, 64, 0.55));
+  box-shadow: 8px 10px 0 rgba(13, 27, 64, 0.55);
   animation: pass-land 700ms cubic-bezier(0.2, 1.3, 0.4, 1) 250ms both;
 }
 
 .pass p { margin: 0; max-width: none; }
 
-.pass-main,
-.pass-stub { background: var(--amber); }
-
-.pass-main {
-  padding: 1.25rem 1.5rem 1.35rem;
-  border-radius: 10px 0 0 10px;
-  /* half-circle bites where the stub tears off */
-  -webkit-mask: radial-gradient(circle at 100% 0, transparent 9px, #000 9.5px) top right / 100% 51% no-repeat,
-                radial-gradient(circle at 100% 100%, transparent 9px, #000 9.5px) bottom right / 100% 51% no-repeat;
-          mask: radial-gradient(circle at 100% 0, transparent 9px, #000 9.5px) top right / 100% 51% no-repeat,
-                radial-gradient(circle at 100% 100%, transparent 9px, #000 9.5px) bottom right / 100% 51% no-repeat;
-}
-
-.pass-stub {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  gap: 1rem;
-  padding: 1.25rem 1.25rem 1.35rem 1.4rem;
-  border-radius: 0 10px 10px 0;
-  border-left: 2px dashed rgba(13, 27, 64, 0.45);
-  -webkit-mask: radial-gradient(circle at 0 0, transparent 9px, #000 9.5px) top left / 100% 51% no-repeat,
-                radial-gradient(circle at 0 100%, transparent 9px, #000 9.5px) bottom left / 100% 51% no-repeat;
-          mask: radial-gradient(circle at 0 0, transparent 9px, #000 9.5px) top left / 100% 51% no-repeat,
-                radial-gradient(circle at 0 100%, transparent 9px, #000 9.5px) bottom left / 100% 51% no-repeat;
-}
-
-.pass-kind {
-  font-weight: 600;
-  font-size: 0.95rem;
-  letter-spacing: 0.01em;
-}
+.pass-issuer { font-weight: 800; font-size: 1.1rem; }
 
 .pass-price { line-height: 1; white-space: nowrap; }
-.pass-kind + .pass-price { margin-top: 0.35rem; }
 .pass-amount {
   font-weight: 900;
   font-size: clamp(3.2rem, 5.2vw, 4.25rem);
@@ -264,29 +237,11 @@ a { color: inherit; }
 }
 .pass-per { font-weight: 600; font-size: 1.15rem; }
 
-.pass-facts {
-  margin: 0.9rem 0 0;
-  font-family: var(--text);
-  font-size: 0.9rem;
-  line-height: 1.35;
-}
-.pass-facts div { display: flex; gap: 0.75rem; }
-.pass-facts div + div { margin-top: 0.2rem; }
-.pass-facts dt { width: 3.2rem; flex: none; opacity: 0.7; }
-.pass-facts dd { margin: 0; font-weight: 600; }
-
-.pass-issuer {
-  font-weight: 800;
-  font-size: 0.95rem;
-  line-height: 1.15;
-  width: 5.2rem;
-}
-.pass-where {
-  white-space: nowrap;
+.pass-note {
+  margin-top: 0.6rem;
   font-family: var(--text);
   font-weight: 600;
-  font-size: 0.82rem;
-  line-height: 1.35;
+  font-size: 0.9rem;
 }
 
 @keyframes pass-land {
@@ -316,6 +271,8 @@ a { color: inherit; }
   align-items: end;
   margin-bottom: clamp(2.5rem, 5vw, 4rem);
 }
+/* sized so each sentence of the heading holds one line */
+.intro h2 { font-size: clamp(1.7rem, 3.3vw, 2.75rem); }
 .intro p { margin: 0; font-size: 1.2rem; }
 
 /* Gallery: rows of photos that share one height */
@@ -487,12 +444,12 @@ figcaption {
   .hero { padding-bottom: 4rem; }
   .hero-photo { width: 100%; aspect-ratio: 5 / 3; border-radius: 6px; }
 
-  /* the pass sits under the photo, overlapping its bottom edge */
+  /* the card sits under the photo, overlapping its bottom edge */
   .pass {
     position: relative;
     left: auto;
     bottom: auto;
-    width: min(25rem, 96%);
+    width: min(20rem, 86%);
     margin: -2.75rem auto 0;
     transform: rotate(-3deg);
     animation-name: pass-land-small;
@@ -514,19 +471,15 @@ figcaption {
 @media (max-width: 420px) {
   body { font-size: 1.0625rem; }
   .wordmark { font-size: 1.2rem; }
-  .pass-main { padding: 1rem 1rem 1.1rem 1.1rem; }
-  .pass-stub { padding: 1rem 0.85rem 1.1rem 0.95rem; }
-  .pass-facts { font-size: 0.8rem; }
-  .pass-facts dt { width: 2.6rem; }
-  .pass-issuer { font-size: 0.85rem; width: 4.6rem; }
-  .pass-where { font-size: 0.76rem; }
+  .pass { padding: 1.1rem 1.25rem 1.15rem; }
+  .pass-issuer { font-size: 1rem; }
 }
 
 @media (max-width: 360px) {
   .wordmark { font-size: 1.05rem; }
   .btn-small { font-size: 0.85rem; padding: 0.6em 0.8em; }
   .pass-amount { font-size: 2.9rem; }
-  .pass-per { display: block; margin-top: 0.3rem; font-size: 1rem; }
+  .pass-note { font-size: 0.82rem; }
 }
 
 @media (prefers-reduced-motion: reduce) {
