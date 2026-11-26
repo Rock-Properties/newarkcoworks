@@ -163,9 +163,10 @@ a { color: inherit; }
 }
 
 /* The logo: the Plume House and the House of Prayer, drawn from a photo of Broad Street.
-   The buildings stand on the baseline of the name. */
+   The buildings stand on the baseline of the name. The picture is centred on the steeple,
+   which leaves it a little empty on the right; the negative margin takes that up. */
 .wordmark, .pass-issuer { align-items: flex-end; }
-.mark { height: 2.6em; width: auto; flex: none; margin-bottom: 0.3em; }
+.mark { height: 2.6em; width: auto; flex: none; margin: 0 -0.22em 0.3em 0; }
 
 .mainnav { display: flex; gap: 2rem; }
 .mainnav a {

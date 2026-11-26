@@ -32,7 +32,7 @@ It is a plain static site: one HTML page, one stylesheet, no build step and no J
   ```
 
   The crops are listed at the top of that script.
-- **Logo**: the drawing is made from one photo (`IMG_5567.jpeg` in the Newark Coworks Dropbox folder). The script cuts the two buildings out along their outline, paints out the poles and signs in front of them, fills each surface with its real color and traces the features in pencil. To redraw it, or to get the logo files again:
+- **Logo**: the drawing is made from one photo (`IMG_5567.jpeg` in the Newark Coworks Dropbox folder) by `tools/build_logo.py`. The church is cut out of the photo and its walls are laid out stone by stone in the photo's perspective. The Plume House, which stands behind poles and signs in the photo, is rebuilt in the same perspective from its clean parts (windows, cornice, stone colors); its entrance porch is a reconstruction. The two stand on one ground line with the steeple tip at the center of the picture. To redraw it, or to get the logo files again:
 
   ```
   pip install pillow numpy opencv-contrib-python
