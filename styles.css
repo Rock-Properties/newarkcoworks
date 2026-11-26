@@ -162,8 +162,10 @@ a { color: inherit; }
   gap: 0.45em;
 }
 
-/* The logo mark: the Plume House and the House of Prayer */
-.mark { width: 2em; height: 2em; flex: none; margin-top: -0.3em; }
+/* The logo: the Plume House and the House of Prayer, drawn from a photo of Broad Street.
+   The buildings stand on the baseline of the name. */
+.wordmark, .pass-issuer { align-items: flex-end; }
+.mark { height: 2.6em; width: auto; flex: none; margin-bottom: 0.3em; }
 
 .mainnav { display: flex; gap: 2rem; }
 .mainnav a {
@@ -234,7 +236,6 @@ a { color: inherit; }
 .pass p { margin: 0; max-width: none; }
 
 .pass-issuer { display: flex; align-items: center; gap: 0.45em; font-weight: 800; font-size: 1.1rem; }
-.pass .mark { --mark-light: var(--amber); }
 
 .pass-price { line-height: 1; white-space: nowrap; }
 .pass-amount {
@@ -437,6 +438,16 @@ figcaption {
 
 /* Narrow screens */
 
+@media (max-width: 1100px) {
+  /* the logo, four links and the button share one row */
+  .masthead, .mainnav { gap: 1.25rem; }
+  .mainnav a { font-size: 0.95rem; }
+}
+
+@media (max-width: 979px) {
+  .mainnav { display: none; }
+}
+
 @media (max-width: 899px) {
   .mainnav { display: none; }
 
@@ -475,10 +486,11 @@ figcaption {
   .routes div { grid-template-columns: minmax(0, 1fr); gap: 0.25rem; }
 }
 
-@media (max-width: 480px) {
-  .masthead { gap: 0.75rem; }
-  .masthead .wordmark { font-size: 1.05rem; gap: 0.35em; }
-  .btn-small { font-size: 0.85rem; padding: 0.6em 0.8em; }
+@media (max-width: 560px) {
+  .masthead { gap: 0.6rem; }
+  .masthead .wordmark { font-size: 0.95rem; gap: 0.3em; }
+  .masthead .mark { height: 2.3em; }
+  .btn-small { font-size: 0.8rem; padding: 0.6em 0.65em; }
 }
 
 @media (max-width: 420px) {
@@ -487,7 +499,7 @@ figcaption {
   .pass-issuer { font-size: 1rem; }
 }
 
-@media (max-width: 360px) {
+@media (max-width: 374px) {
   /* the mark stands in for the name; the link keeps its label for screen readers */
   .masthead .wordmark { font-size: 1.3rem; }
   .masthead .wordmark-text { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); }
