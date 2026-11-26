@@ -747,25 +747,12 @@ def scaled(im, height):
     return im.convert("RGBa").resize((w_, round(height)), Image.LANCZOS).convert("RGBA")
 
 
-def keyline(im, px, colour=WHITE_RGB):
-    """A paper-white edge around the cut-out, so it reads on the site's blue and on dark grounds."""
-    pad = int(np.ceil(px)) + 2
-    a_ = np.zeros((im.height + 2 * pad, im.width + 2 * pad), np.uint8)
-    a_[pad:-pad, pad:-pad] = np.asarray(im)[..., 3]
-    k = 2 * int(round(px)) + 1
-    ring = cv2.GaussianBlur(cv2.dilate(a_, cv2.getStructuringElement(cv2.MORPH_ELLIPSE, (k, k))), (0, 0), 0.7)
-    out = Image.new("RGBA", (a_.shape[1], a_.shape[0]), colour + (0,))
-    out.putalpha(Image.fromarray(ring))
-    out.alpha_composite(im, (pad, pad))
-    return out
-
-
 def tile(size, radius, ground=BLUE, over_=4):
-    """App-icon style square: the drawing with its paper edge on the site's blue, steeple in the middle."""
+    """App-icon style square: the drawing on the site's blue, steeple in the middle."""
     S_ = size * over_
     im = Image.new("RGBA", (S_, S_), (0, 0, 0, 0))
     ImageDraw.Draw(im).rounded_rectangle([0, 0, S_ - 1, S_ - 1], radius * over_, fill=ground + (255,))
-    art = keyline(scaled(drawing, S_ * 0.76), S_ * 0.02)
+    art = scaled(drawing, S_ * 0.78)
     im.alpha_composite(art, ((S_ - art.width) // 2, (S_ - art.height) // 2))
     return im.resize((size, size), Image.LANCZOS)
 
@@ -776,11 +763,9 @@ def name_font(px):
     return f
 
 
-def stacked(mark_h, ink, edge=0.0, ground=None, margin=0):
+def stacked(mark_h, ink, ground=None, margin=0):
     """The drawing with the name centred under the steeple."""
     art = scaled(drawing, mark_h)
-    if edge:
-        art = keyline(art, edge)
     font = name_font(mark_h * 0.105)                    # the name comes out a little narrower than the drawing
     l, t, r, b = font.getbbox("Newark Coworks", anchor="ls")
     gap = round(mark_h * 0.075)
@@ -791,22 +776,20 @@ def stacked(mark_h, ink, edge=0.0, ground=None, margin=0):
     return im
 
 
-def beside(mark_h, ink, edge=0.0):
+def beside(mark_h, ink):
     """The drawing with the name beside it, standing on the same ground line."""
     art = scaled(drawing.crop(drawing.getbbox()), mark_h)
-    if edge:
-        art = keyline(art, edge)
     font = name_font(mark_h * 0.29)
     l, t, r, b = font.getbbox("Newark Coworks", anchor="ls")
     gap = round(mark_h * 0.11)
     im = Image.new("RGBA", (art.width + gap + (r - l), art.height), (0, 0, 0, 0))
     im.alpha_composite(art, (0, 0))
-    ImageDraw.Draw(im).text((art.width + gap - l, art.height - round(mark_h * 0.012) - (int(np.ceil(edge)) + 2 if edge else 2)), "Newark Coworks", font=font, fill=ink + (255,), anchor="ls")
+    ImageDraw.Draw(im).text((art.width + gap - l, art.height - round(mark_h * 0.012) - 2), "Newark Coworks", font=font, fill=ink + (255,), anchor="ls")
     return im
 
 
 # --- the site
-keyline(scaled(drawing, 320), 5.0).save(os.path.join(SITE, "images", "logo-mark.webp"), quality=92, method=6)
+scaled(drawing, 336).save(os.path.join(SITE, "images", "logo-mark.webp"), quality=92, method=6)
 tile(32, 7).save(os.path.join(SITE, "favicon-32.png"), optimize=True)
 tile(192, 40).save(os.path.join(SITE, "favicon-192.png"), optimize=True)
 tile(180, 0).save(os.path.join(SITE, "apple-touch-icon.png"), optimize=True)
@@ -815,7 +798,6 @@ tile(180, 0).save(os.path.join(SITE, "apple-touch-icon.png"), optimize=True)
 if FILES:
     scaled(drawing, 2400).save(os.path.join(FILES, "newark-coworks-logo-mark.png"), optimize=True)
     stacked(1500, NIGHT).save(os.path.join(FILES, "newark-coworks-logo.png"), optimize=True)
-    stacked(1500, WHITE_RGB, edge=16).save(os.path.join(FILES, "newark-coworks-logo-for-dark-backgrounds.png"), optimize=True)
     beside(1000, NIGHT).save(os.path.join(FILES, "newark-coworks-logo-wide.png"), optimize=True)
     sq = stacked(840, NIGHT)
     assert sq.width <= 1100 and sq.height <= 1100, sq.size
